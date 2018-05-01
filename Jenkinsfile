@@ -1,5 +1,7 @@
 pipeline {
-  agent any
+  agent {
+    label 'jdk8'
+  }
   stages {
     stage('Deploy') {
       options {
@@ -24,6 +26,7 @@ pipeline {
             echo "Hello ${MY_NAME}!"
             echo "${TEST_USER_USR}"
             echo "${TEST_USER_PSW}"
+            sh 'java -version'
           }
         }
         stage('Dump Java Version') {
