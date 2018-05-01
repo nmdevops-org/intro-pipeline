@@ -3,6 +3,15 @@ pipeline {
     label 'jdk8'
   }
   stages {
+    stage('Say Hello') {
+      steps {
+        echo "Hello ${params.Name}!"
+        echo "Hello ${MY_NAME}!"
+        echo "${TEST_USER_USR}"
+        echo "${TEST_USER_PSW}"
+        sh 'java -version'
+      }
+    }
     stage('Deploy') {
       options {
         timeout(time: 30, unit: 'SECONDS')
@@ -16,24 +25,6 @@ pipeline {
       }
       steps {
         echo "Deploying ${APP_VERSION}."
-      }
-    }
-    stage('Say Hello') {
-      parallel {
-        stage('Say Hello') {
-          steps {
-            echo "Hello ${params.Name}!"
-            echo "Hello ${MY_NAME}!"
-            echo "${TEST_USER_USR}"
-            echo "${TEST_USER_PSW}"
-            sh 'java -version'
-          }
-        }
-        stage('Dump Java Version') {
-          steps {
-            sh 'java -version'
-          }
-        }
       }
     }
   }
