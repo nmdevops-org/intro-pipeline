@@ -3,6 +3,14 @@ pipeline {
     label 'jdk9'
   }
   stages {
+    stage('Deploy') {
+      input {
+        message 'Should we continue?'
+      }
+      steps {
+        echo 'Continuing with deployment'
+      }
+    }
     stage('Say Hello') {
       parallel {
         stage('Say Hello') {
